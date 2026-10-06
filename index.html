@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="ru" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>AI помощник КМ — Сбер Лизинг</title>
+  <meta name="description" content="AI помощник КМ по внутренней документации">
+  <script>
+    // Тема до отрисовки, чтобы не мигало: ?theme= → сохранённая → системная
+    (function () {
+      var q = new URLSearchParams(location.search).get('theme');
+      var saved = null;
+      try { saved = localStorage.getItem('km-theme'); } catch (e) {}
+      var sys = window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      document.documentElement.dataset.theme = q || saved || sys;
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+  <!-- Спрайт иконок — Lucide (lucide-static 1.52.0, ISC) -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <defs>
+      <symbol id="i-message" viewBox="0 0 24 24"><path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719"/><path d="M8 12h.01"/><path d="M12 12h.01"/><path d="M16 12h.01"/></symbol>
+      <symbol id="i-bulb" viewBox="0 0 24 24"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></symbol>
+      <symbol id="i-send" viewBox="0 0 24 24"><path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z"/><path d="m21.854 2.147-10.94 10.939"/></symbol>
+      <symbol id="i-trend" viewBox="0 0 24 24"><path d="M16 7h6v6"/><path d="m22 7-8.5 8.5-5-5L2 17"/></symbol>
+      <symbol id="i-close" viewBox="0 0 24 24"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></symbol>
+      <symbol id="i-copy" viewBox="0 0 24 24"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></symbol>
+      <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+      <symbol id="i-sparkle" viewBox="0 0 24 24"><path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z"/><path d="M20 2v4"/><path d="M22 4h-4"/><circle cx="4" cy="20" r="2"/></symbol>
+      <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></symbol>
+      <symbol id="i-alert" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="8" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/></symbol>
+      <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/></symbol>
+      <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></symbol>
+      <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></symbol>
+      <symbol id="i-book" viewBox="0 0 24 24"><path d="M12 5v16"/><path d="M20.001 19A2 2 0 0022 17V5a2 2 0 00-1.999-2L16 3.002A5 5 0 0012 5a5 5 0 00-4-2H4a2 2 0 00-2 2v12a2 2 0 001.999 2H8a5 5 0 014 2 5 5 0 014-2z"/></symbol>
+    </defs>
+  </svg>
+
+  <!-- Фон: ленты из линий в стиле Сбер (сгенерированы, цвета — шкалы Nova) -->
+  <div class="decor" aria-hidden="true">
+    <svg class="decor__lines decor__lines--tl" viewBox="0 0 280 880" preserveAspectRatio="xMinYMin meet" fill="none"><defs><linearGradient id="dl-tl" gradientUnits="userSpaceOnUse" x1="0" y1="860" x2="260" y2="0"><stop offset="0" stop-color="#96DD12"/><stop offset=".35" stop-color="#21A038"/><stop offset=".7" stop-color="#3FE0B1"/><stop offset="1" stop-color="#05C1F5"/></linearGradient></defs><g stroke="url(#dl-tl)" stroke-width="1.25"><path d="M30 0C0 220 330 380 0 660" stroke-opacity="0.4"/><path d="M28.2 0C7.1 224.7 325.3 390.6 0 671.8" stroke-opacity="0.5"/><path d="M26.5 0C14.1 229.4 320.6 401.2 0 683.5" stroke-opacity="0.6"/><path d="M24.7 0C21.2 234.1 315.9 411.8 0 695.3" stroke-opacity="0.7"/><path d="M22.9 0C28.2 238.8 311.2 422.4 0 707.1" stroke-opacity="0.8"/><path d="M21.2 0C35.3 243.5 306.5 432.9 0 718.8" stroke-opacity="0.9"/><path d="M19.4 0C42.4 248.2 301.8 443.5 0 730.6" stroke-opacity="0.9"/><path d="M17.6 0C49.4 252.9 297.1 454.1 0 742.4" stroke-opacity="1"/><path d="M15.9 0C56.5 257.6 292.4 464.7 0 754.1" stroke-opacity="1"/><path d="M14.1 0C63.5 262.4 287.6 475.3 0 765.9" stroke-opacity="1"/><path d="M12.4 0C70.6 267.1 282.9 485.9 0 777.6" stroke-opacity="1"/><path d="M10.6 0C77.6 271.8 278.2 496.5 0 789.4" stroke-opacity="0.9"/><path d="M8.8 0C84.7 276.5 273.5 507.1 0 801.2" stroke-opacity="0.9"/><path d="M7.1 0C91.8 281.2 268.8 517.6 0 812.9" stroke-opacity="0.8"/><path d="M5.3 0C98.8 285.9 264.1 528.2 0 824.7" stroke-opacity="0.7"/><path d="M3.5 0C105.9 290.6 259.4 538.8 0 836.5" stroke-opacity="0.6"/><path d="M1.8 0C112.9 295.3 254.7 549.4 0 848.2" stroke-opacity="0.5"/><path d="M0 0C120 300 250 560 0 860" stroke-opacity="0.4"/></g></svg>
+    <svg class="decor__lines decor__lines--br" viewBox="0 0 1200 800" preserveAspectRatio="xMaxYMax meet" fill="none"><defs><linearGradient id="dl-br" gradientUnits="userSpaceOnUse" x1="420" y1="800" x2="1200" y2="240"><stop offset="0" stop-color="#96DD12"/><stop offset=".35" stop-color="#21A038"/><stop offset=".7" stop-color="#3FE0B1"/><stop offset="1" stop-color="#05C1F5"/></linearGradient></defs><g stroke="url(#dl-br)" stroke-width="1.25"><path d="M420 800C700 620 900 420 1200 240" stroke-opacity="0.4"/><path d="M437.6 800C700.8 616 904 427.2 1200 251.2" stroke-opacity="0.4"/><path d="M455.2 800C701.6 612 908 434.4 1200 262.4" stroke-opacity="0.5"/><path d="M472.8 800C702.4 608 912 441.6 1200 273.6" stroke-opacity="0.6"/><path d="M490.4 800C703.2 604 916 448.8 1200 284.8" stroke-opacity="0.7"/><path d="M508 800C704 600 920 456 1200 296" stroke-opacity="0.7"/><path d="M525.6 800C704.8 596 924 463.2 1200 307.2" stroke-opacity="0.8"/><path d="M543.2 800C705.6 592 928 470.4 1200 318.4" stroke-opacity="0.9"/><path d="M560.8 800C706.4 588 932 477.6 1200 329.6" stroke-opacity="0.9"/><path d="M578.4 800C707.2 584 936 484.8 1200 340.8" stroke-opacity="0.9"/><path d="M596 800C708 580 940 492 1200 352" stroke-opacity="1"/><path d="M613.6 800C708.8 576 944 499.2 1200 363.2" stroke-opacity="1"/><path d="M631.2 800C709.6 572 948 506.4 1200 374.4" stroke-opacity="1"/><path d="M648.8 800C710.4 568 952 513.6 1200 385.6" stroke-opacity="1"/><path d="M666.4 800C711.2 564 956 520.8 1200 396.8" stroke-opacity="1"/><path d="M684 800C712 560 960 528 1200 408" stroke-opacity="1"/><path d="M701.6 800C712.8 556 964 535.2 1200 419.2" stroke-opacity="0.9"/><path d="M719.2 800C713.6 552 968 542.4 1200 430.4" stroke-opacity="0.9"/><path d="M736.8 800C714.4 548 972 549.6 1200 441.6" stroke-opacity="0.9"/><path d="M754.4 800C715.2 544 976 556.8 1200 452.8" stroke-opacity="0.8"/><path d="M772 800C716 540 980 564 1200 464" stroke-opacity="0.7"/><path d="M789.6 800C716.8 536 984 571.2 1200 475.2" stroke-opacity="0.7"/><path d="M807.2 800C717.6 532 988 578.4 1200 486.4" stroke-opacity="0.6"/><path d="M824.8 800C718.4 528 992 585.6 1200 497.6" stroke-opacity="0.5"/><path d="M842.4 800C719.2 524 996 592.8 1200 508.8" stroke-opacity="0.4"/><path d="M860 800C720 520 1000 600 1200 520" stroke-opacity="0.4"/></g></svg>
+  </div>
+
+  <!-- ===================== Шапка ===================== -->
+  <header class="hero">
+    <div class="container hero__inner">
+      <div class="hero__media">
+        <picture>
+          <source media="(max-width: 767px)" srcset="assets/hero-light-mobile.webp" width="1448" height="1086">
+          <img class="hero__img hero__img--light" src="assets/hero-light.webp" alt="" width="1916" height="821" fetchpriority="high">
+        </picture>
+        <picture>
+          <source media="(max-width: 767px)" srcset="assets/hero-dark-mobile.webp" width="1448" height="1086">
+          <img class="hero__img hero__img--dark" src="assets/hero-dark.webp" alt="" width="1916" height="821">
+        </picture>
+      </div>
+      <div class="topbar">
+        <a class="logo" href="./" data-action="home" aria-label="Сбер Лизинг — на главную">
+          <img src="assets/logo.svg" alt="Сбер Лизинг" width="365" height="48">
+        </a>
+        <button class="toggle theme-toggle" type="button" role="switch" aria-checked="false" aria-label="Тёмная тема" data-theme-toggle>
+          <span class="toggle__track">
+            <span class="toggle__thumb">
+              <svg class="icon toggle__icon toggle__icon--off" aria-hidden="true"><use href="#i-sun"/></svg>
+              <svg class="icon toggle__icon toggle__icon--on" aria-hidden="true"><use href="#i-moon"/></svg>
+            </span>
+          </span>
+        </button>
+      </div>
+      <div class="hero__text">
+        <h1 class="hero__title">AI помощник КМ <span class="hero__title-line">по внутренней документации</span></h1>
+        <p class="hero__subtitle">Задавайте вопросы, получайте ответы, изучайте продукты и материалы — и достигайте больших продаж</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===================== Тело ===================== -->
+  <main class="container layout" id="app" data-view="home">
+
+    <!-- Слоган -->
+    <aside class="motto">
+      <span class="motto__rule" aria-hidden="true"></span>
+      <p class="motto__text">Больше знаний — больше уверенности. Больше уверенности — больше продаж</p>
+      <svg class="icon motto__icon" aria-hidden="true"><use href="#i-trend"/></svg>
+    </aside>
+
+    <!-- Экран 1–2: стартовая карточка -->
+    <section class="card ask" aria-labelledby="ask-title" data-home>
+      <div class="ask__head">
+        <span class="ask__icon" aria-hidden="true"><svg class="icon icon--lg"><use href="#i-message"/></svg></span>
+        <div>
+          <h2 class="ask__title" id="ask-title">Задай свой вопрос</h2>
+          <p class="ask__hint">Напиши, что тебя интересует — я помогу найти ответ</p>
+        </div>
+      </div>
+
+      <form class="composer" data-composer novalidate>
+        <div class="field">
+          <label class="visually-hidden" for="q-home">Сообщение</label>
+          <div class="field__box">
+            <textarea class="field__input" id="q-home" name="q" rows="4" placeholder="Напишите сообщение..." aria-describedby="q-home-msg"></textarea>
+            <div class="field__footer">
+              <span class="field__counter" aria-hidden="true"></span>
+              <button class="btn btn--primary" type="submit" disabled>
+                <svg class="icon" aria-hidden="true"><use href="#i-send"/></svg>
+                <span>Отправить</span>
+              </button>
+            </div>
+          </div>
+          <p class="field__msg" id="q-home-msg" aria-live="polite"></p>
+        </div>
+      </form>
+
+      <div class="popular">
+        <h3 class="popular__title">
+          <svg class="icon icon--accent" aria-hidden="true"><use href="#i-bulb"/></svg>
+          Примеры популярных вопросов
+        </h3>
+        <ul class="popular__list" role="list">
+          <li><button class="chip" type="button" data-question>Какие есть тарифы на продукт «Профи»?</button></li>
+          <li><button class="chip" type="button" data-question>Как обрабатывать возражения клиентов?</button></li>
+          <li><button class="chip" type="button" data-question>Какие документы нужны для оформления сделки?</button></li>
+          <li><button class="chip" type="button" data-question>Какой срок внедрения продукта?</button></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Экран 2: «Что ты умеешь?» + pop-up -->
+    <div class="side" data-home>
+      <div class="side__panel">
+        <button class="btn btn--primary btn--lg btn--block" type="button" aria-expanded="false" aria-controls="skills" data-skills-toggle>
+          <svg class="icon" aria-hidden="true"><use href="#i-send"/></svg>
+          <span>Что ты умеешь?</span>
+        </button>
+      </div>
+      <div class="popup" id="skills" role="region" aria-labelledby="skills-title" hidden>
+        <h3 class="popup__title" id="skills-title">
+          <svg class="icon icon--accent" aria-hidden="true"><use href="#i-book"/></svg>
+          Темы, по которым я отвечаю
+        </h3>
+        <ul class="popup__list" role="list">
+          <li><button class="topic" type="button" data-topic>Продукты и тарифы</button></li>
+          <li><button class="topic" type="button" data-topic>Условия лизинга и расчёт платежей</button></li>
+          <li><button class="topic" type="button" data-topic>Документы для сделки</button></li>
+          <li><button class="topic" type="button" data-topic>Работа с возражениями</button></li>
+          <li><button class="topic" type="button" data-topic>Коммерческие предложения</button></li>
+          <li><button class="topic" type="button" data-topic>Регламенты и сроки</button></li>
+        </ul>
+        <div class="popup__footer">
+          <button class="btn btn--primary btn--sm" type="button" data-skills-close>
+            <svg class="icon" aria-hidden="true"><use href="#i-close"/></svg>
+            <span>Закрыть</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Экран 3–4: чат -->
+    <section class="card chat" aria-label="Диалог с AI помощником КМ" data-chat hidden>
+      <div class="chat__log" role="log" aria-live="polite" aria-relevant="additions" data-log></div>
+
+      <form class="composer composer--chat" data-composer novalidate>
+        <div class="field">
+          <label class="visually-hidden" for="q-chat">Сообщение</label>
+          <div class="field__box">
+            <textarea class="field__input" id="q-chat" name="q" rows="1" placeholder="Напишите сообщение..." aria-describedby="q-chat-msg"></textarea>
+            <div class="field__footer">
+              <span class="field__counter" aria-hidden="true"></span>
+              <button class="btn btn--primary" type="submit" disabled>
+                <svg class="icon" aria-hidden="true"><use href="#i-send"/></svg>
+                <span>Отправить</span>
+              </button>
+            </div>
+          </div>
+          <p class="field__msg" id="q-chat-msg" aria-live="polite"></p>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <!-- Шаблоны сообщений -->
+  <template id="tpl-user">
+    <article class="msg msg--user">
+      <header class="msg__meta"><span class="msg__author">Пользователь X</span><time class="msg__time"></time></header>
+      <div class="msg__bubble"></div>
+    </article>
+  </template>
+
+  <template id="tpl-bot">
+    <article class="msg msg--bot">
+      <span class="msg__avatar" aria-hidden="true"><svg class="icon"><use href="#i-sparkle"/></svg></span>
+      <div class="msg__body">
+        <header class="msg__meta"><span class="msg__author">AI помощник КМ</span><time class="msg__time"></time></header>
+        <div class="msg__bubble answer"></div>
+        <div class="msg__actions">
+          <button class="btn btn--ghost btn--sm" type="button" data-copy>
+            <svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg>
+            <span>Скопировать</span>
+          </button>
+        </div>
+      </div>
+    </article>
+  </template>
+
+  <template id="tpl-loading">
+    <article class="msg msg--bot msg--loading" aria-busy="true">
+      <span class="msg__avatar msg__avatar--lg" aria-hidden="true"><svg class="icon"><use href="#i-sparkle"/></svg></span>
+      <div class="msg__body">
+        <header class="msg__meta"><span class="msg__author">AI помощник КМ</span></header>
+        <div class="loader">
+          <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
+          <span class="loader__text">Спешу к Вам с ответом...</span>
+        </div>
+        <div class="progress" role="progressbar" aria-label="Подготовка ответа" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+          <span class="progress__bar"></span>
+        </div>
+      </div>
+    </article>
+  </template>
+
+  <template id="tpl-error">
+    <article class="msg msg--bot msg--error" role="alert">
+      <span class="msg__avatar" aria-hidden="true"><svg class="icon"><use href="#i-sparkle"/></svg></span>
+      <div class="msg__body">
+        <header class="msg__meta"><span class="msg__author">AI помощник КМ</span><time class="msg__time"></time></header>
+        <div class="msg__bubble">
+          <p class="msg__error-title"><svg class="icon" aria-hidden="true"><use href="#i-alert"/></svg><span>Не удалось получить ответ</span></p>
+          <p class="msg__error-text">Проверьте подключение и попробуйте ещё раз. Ваш вопрос сохранён.</p>
+        </div>
+        <div class="msg__actions">
+          <button class="btn btn--primary btn--sm" type="button" data-retry>
+            <svg class="icon" aria-hidden="true"><use href="#i-refresh"/></svg>
+            <span>Повторить</span>
+          </button>
+        </div>
+      </div>
+    </article>
+  </template>
+
+  <div class="toast" role="status" aria-live="polite" data-toast></div>
+
+  <script src="js/answers.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

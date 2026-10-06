@@ -1,0 +1,187 @@
+/* ==========================================================================
+   Токены. Палитра — шкалы Nova (sberbank.ru/promo/nova, раздел «Палитра»).
+   Нейтральные (серые) на странице Nova отсутствуют — подобраны вручную
+   с зелёным подтоном и помечены «custom».
+   Семантика: светлая тема по умолчанию, тёмная — [data-theme="dark"].
+   ========================================================================== */
+
+:root {
+  /* --- Примитивы Nova: зелёный (изумрудный) ряд, шаги 0 → 13 --- */
+  --green-0: #050A06;
+  --green-1: #071F0C;
+  --green-2: #0A2B10;
+  --green-3: #0A4014;
+  --green-4: #095C18;
+  --green-5: #0D8523;
+  --green-6: #148F2B;
+  --green-7: #21A038; /* фирменный зелёный Сбера */
+  --green-8: #24B23E;
+  --green-9: #19D13B;
+  --green-10: #2EE850;
+  --green-11: #62F57D;
+  --green-12: #9BFAAC;
+  --green-13: #E0FFE9;
+
+  /* --- Примитивы Nova: бирюзовый, салатовый, красный, янтарный --- */
+  --teal-2: #072B21;
+  --teal-9: #21CA9A;
+  --teal-10: #3FE0B1;
+  --teal-13: #DBFFF5;
+  --lime-10: #96DD12;
+  --red-5: #E31227;
+  --red-8: #FF4D5E;
+  --red-12: #FFE0E3;
+  --red-13: #FFF5F6;
+  --amber-5: #A16B00;
+
+  /* --- Градиент-акцент Nova (.title_1) --- */
+  --gradient-nova: linear-gradient(180deg, #95DD12 0%, #3FE0B1 100%);
+
+  /* --- Типографика (аналог SB Sans → Golos Text) --- */
+  --font-sans: "Golos Text", "SB Sans Text", "SB Sans Display", Arial, sans-serif;
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+
+  /* размер / межстрочный — кратно 8 (мелкий текст — 4) */
+  --t-h1: 700 32px/40px var(--font-sans);
+  --t-h2: 600 32px/40px var(--font-sans);
+  --t-h3: 600 24px/32px var(--font-sans);
+  --t-h4: 600 20px/24px var(--font-sans);
+  --t-lead: 400 20px/32px var(--font-sans);
+  --t-body: 400 16px/24px var(--font-sans);
+  --t-body-strong: 600 16px/24px var(--font-sans);
+  --t-caption: 400 14px/20px var(--font-sans);
+  --t-caption-strong: 600 14px/20px var(--font-sans);
+
+  /* --- Сетка 8px --- */
+  --s-1: 8px;
+  --s-2: 16px;
+  --s-3: 24px;
+  --s-4: 32px;
+  --s-5: 40px;
+  --s-6: 48px;
+  --s-7: 56px;
+  --s-8: 64px;
+  --s-10: 80px;
+
+  --container: 1280px;
+  --gutter: 32px;
+  --tap: 48px;
+
+  /* --- Радиусы (из набора Nova) --- */
+  --r-sm: 8px;
+  --r-md: 12px;
+  --r-lg: 20px;
+  --r-xl: 24px;
+  --r-pill: 40px;
+
+  /* --- Движение --- */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --dur-fast: 120ms;
+  --dur: 200ms;
+
+  /* ===================== Семантика: СВЕТЛАЯ ===================== */
+  color-scheme: light;
+
+  --c-bg-page: #F5F9F6;            /* custom */
+  --c-bg-surface: #FFFFFF;
+  --c-bg-surface-2: #F1F7F3;       /* custom: чипы, плашки бота */
+  --c-bg-hover: #E8F3EC;           /* custom */
+  --c-bg-glass: rgba(255, 255, 255, 0.72);
+
+  --c-text-primary: #0B2318;       /* custom, 15.9:1 на белом */
+  --c-text-secondary: #4A5E55;     /* custom, 6.9:1 */
+  --c-text-tertiary: #64766E;      /* custom, 4.8:1 — плейсхолдеры */
+  --c-text-on-accent: #FFFFFF;
+
+  --c-border: #DCE8E1;             /* custom: декоративные разделители */
+  --c-border-input: #7E9A8B;       /* custom: 3:1 — граница поля (WCAG 1.4.11) */
+
+  /* $c-accent-primary. Фирменный #21A038 даёт 3.4:1 с белым —
+     для кнопок и текста берём шаг 5 той же шкалы (4.8:1, AA). */
+  --c-accent-primary: var(--green-5);
+  --c-accent-primary-hover: #0B7A20;   /* между шагами 5 и 4 */
+  --c-accent-primary-active: var(--green-4);
+  --c-accent-brand: var(--green-7);    /* иконки, декор, крупные элементы */
+  --c-accent-text: var(--green-5);
+  --c-accent-soft: var(--green-13);    /* плашка пользователя */
+  --c-accent-soft-border: #BFEBCB;     /* custom */
+
+  /* Сообщения чата: пользователь — зелёный, помощник — нейтральный */
+  --c-msg-user-bg: #D6F5DE;            /* custom */
+  --c-msg-user-border: #A9E2B9;        /* custom */
+  --c-msg-bot-bg: #F2F4F3;             /* custom */
+  --c-msg-bot-border: #E1E6E3;         /* custom */
+
+  /* Полоса прокрутки */
+  --c-scroll-thumb: #9DB5A7;           /* custom */
+  --c-scroll-track: #EEF3F0;           /* custom */
+
+  --c-error: var(--red-5);             /* 4.8:1 */
+  --c-error-soft: var(--red-13);
+  --c-error-border: #F5B8BF;           /* custom */
+  --c-focus: var(--green-5);
+
+  --c-disabled-bg: #E6ECE8;            /* custom */
+  --c-disabled-text: #8A9A92;          /* custom, неактивные элементы — без требования контраста */
+
+  --shadow-card: 0 1px 2px rgba(11, 35, 24, 0.04), 0 16px 40px rgba(11, 35, 24, 0.08);
+  --shadow-pop: 0 4px 8px rgba(11, 35, 24, 0.06), 0 24px 56px rgba(11, 35, 24, 0.14);
+  --shadow-btn: 0 4px 8px rgba(13, 133, 35, 0.24);
+
+  --decor-opacity: 1;
+  --decor-lines-opacity: 0.7;
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  /* было: page #050A06, surface #0C1510, surface-2 #12201A, hover #182B21, border #1E2E25 */
+  --c-bg-page: #0B120E;                /* custom, чуть светлее green-0 */
+  --c-bg-surface: #131D17;             /* custom */
+  --c-bg-surface-2: #1A2820;           /* custom */
+  --c-bg-hover: #213328;               /* custom */
+  --c-bg-glass: rgba(19, 29, 23, 0.72);
+
+  --c-text-primary: #EAF5EE;           /* custom */
+  --c-text-secondary: #A9BDB2;         /* custom */
+  --c-text-tertiary: #8AA195;          /* custom, 6.6:1 на surface */
+  --c-text-on-accent: #FFFFFF;
+
+  --c-border: #26382D;                 /* custom */
+  --c-border-input: #56735F;           /* custom, 3.3:1 на surface */
+
+  --c-accent-primary: var(--green-5);  /* белый текст 4.8:1 */
+  --c-accent-primary-hover: #0B7A20;   /* green-6 даёт 4.2:1 с белым — не AA */
+  --c-accent-primary-active: var(--green-4);
+  --c-accent-brand: var(--green-8);
+  --c-accent-text: var(--green-8);     /* 6.9:1 на surface */
+  --c-accent-soft: var(--green-2);
+  --c-accent-soft-border: var(--green-3);
+
+  --c-msg-user-bg: #124A22;            /* custom */
+  --c-msg-user-border: #1F6B33;        /* custom */
+  --c-msg-bot-bg: #1F2723;             /* custom, нейтральный графит */
+  --c-msg-bot-border: #2F3934;         /* custom */
+
+  --c-scroll-thumb: #4A6354;           /* custom */
+  --c-scroll-track: #1A2820;           /* custom */
+
+  --c-error: var(--red-8);
+  --c-error-soft: #2A0A0E;             /* custom */
+  --c-error-border: #6B2029;           /* custom */
+  --c-focus: var(--green-9);
+
+  --c-disabled-bg: #17221C;            /* custom */
+  --c-disabled-text: #5E7268;          /* custom */
+
+  /* тени Nova */
+  --shadow-card: 0 1px 2px rgba(18, 18, 18, 0.24), 0 4px 8px rgba(18, 18, 18, 0.6);
+  --shadow-pop: 0 1px 2px rgba(0, 0, 0, 0.4), 0 24px 56px rgba(0, 0, 0, 0.6);
+  --shadow-btn: 0 4px 8px rgba(0, 0, 0, 0.4);
+
+  --decor-opacity: 1;
+  --decor-lines-opacity: 0.55;
+}

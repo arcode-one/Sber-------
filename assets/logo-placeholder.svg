@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="248" height="48" viewBox="0 0 248 48" fill="none">
+  <!-- ЗАГЛУШКА логотипа «Сбер Лизинг». Заменить финальным SVG. -->
+  <rect x="1" y="1" width="46" height="46" rx="23" stroke="#21A038" stroke-width="2" stroke-dasharray="4 4"/>
+  <text x="24" y="28" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" font-weight="700" fill="#21A038">LOGO</text>
+  <text x="60" y="33" font-family="Arial, sans-serif" font-size="24" font-weight="700" letter-spacing="0.5" fill="#21A038">СБЕР ЛИЗИНГ</text>
+</svg>

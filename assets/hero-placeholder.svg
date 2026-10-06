@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="640" viewBox="0 0 1600 640" fill="none">
+  <!-- ЗАГЛУШКА изображения шапки (город + сотрудники). Заменить финальным изображением 1600×640. -->
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#D9EEF8"/>
+      <stop offset="1" stop-color="#EEF8F1"/>
+    </linearGradient>
+    <linearGradient id="glass" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#7FB8D6"/>
+      <stop offset="1" stop-color="#3E9E6B"/>
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="640" fill="url(#sky)"/>
+  <g fill="url(#glass)" opacity="0.55">
+    <rect x="180" y="200" width="120" height="440" rx="6"/>
+    <rect x="320" y="120" width="150" height="520" rx="6"/>
+    <rect x="490" y="260" width="110" height="380" rx="6"/>
+    <rect x="1250" y="80" width="220" height="560" rx="10"/>
+    <rect x="1490" y="220" width="110" height="420" rx="6"/>
+  </g>
+  <g fill="#0B2318" opacity="0.18">
+    <rect x="760" y="210" width="130" height="430" rx="60"/>
+    <rect x="930" y="250" width="120" height="390" rx="56"/>
+    <rect x="1090" y="300" width="100" height="340" rx="48"/>
+  </g>
+  <g fill="#21A038" opacity="0.35">
+    <ellipse cx="200" cy="640" rx="240" ry="60"/>
+    <ellipse cx="1500" cy="640" rx="260" ry="70"/>
+  </g>
+  <text x="975" y="160" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" font-weight="700" fill="#0B2318" opacity="0.55">ИЗОБРАЖЕНИЕ — ЗАГЛУШКА 1600×640</text>
+</svg>

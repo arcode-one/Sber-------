@@ -1,0 +1,127 @@
+<!doctype html>
+<!-- Иконки — Lucide (lucide-static 1.52.0, ISC) -->
+<html lang="ru" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>UI Kit — AI помощник КМ</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/main.css">
+  <style>
+    body { padding: 0; }
+    .kit { display: grid; grid-template-columns: 1fr 1fr; }
+    .kit__theme { padding: var(--s-6) var(--s-5); background: var(--c-bg-page); color: var(--c-text-primary); }
+    .kit__theme > h1 { font: var(--t-h2); margin-bottom: var(--s-5); }
+    .kit h2 { font: var(--t-h4); margin: var(--s-5) 0 var(--s-2); }
+    .kit h2:first-of-type { margin-top: 0; }
+    .row { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: var(--s-3) var(--s-2); align-items: start; }
+    .row--wide { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
+    .cell { display: grid; gap: var(--s-1); justify-items: start; }
+    .cell__label { font: var(--t-caption); color: var(--c-text-tertiary); }
+    .cell .field { width: 100%; }
+    .cell .field__input { min-height: 48px; }
+    .swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: var(--s-2); }
+    .sw { display: grid; gap: 4px; font: var(--t-caption); }
+    .sw i { display: block; height: 48px; border-radius: var(--r-md); border: 1px solid var(--c-border); }
+    .sw code { color: var(--c-text-tertiary); font-size: 12px; }
+    @media (max-width: 1023px) { .kit { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <symbol id="i-send" viewBox="0 0 24 24"><path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z"/><path d="m21.854 2.147-10.94 10.939"/></symbol>
+      <symbol id="i-copy" viewBox="0 0 24 24"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></symbol>
+      <symbol id="i-alert" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="8" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/></symbol>
+      <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></symbol>
+      <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></symbol>
+    </defs>
+  </svg>
+
+  <main class="kit" id="kit"></main>
+
+  <template id="tpl-theme">
+    <section class="kit__theme">
+      <h1></h1>
+
+      <h2>Кнопка — Primary</h2>
+      <div class="row">
+        <div class="cell"><span class="cell__label">Default</span><button class="btn btn--primary" type="button"><svg class="icon"><use href="#i-send"/></svg><span>Отправить</span></button></div>
+        <div class="cell"><span class="cell__label">Hover</span><button class="btn btn--primary is-hover" type="button"><svg class="icon"><use href="#i-send"/></svg><span>Отправить</span></button></div>
+        <div class="cell"><span class="cell__label">Active</span><button class="btn btn--primary is-active" type="button"><svg class="icon"><use href="#i-send"/></svg><span>Отправить</span></button></div>
+        <div class="cell"><span class="cell__label">Disabled</span><button class="btn btn--primary" type="button" disabled><svg class="icon"><use href="#i-send"/></svg><span>Отправить</span></button></div>
+        <div class="cell"><span class="cell__label">Loading</span><button class="btn btn--primary is-loading" type="button" aria-busy="true"><svg class="icon"><use href="#i-send"/></svg><span>Отправить</span></button></div>
+      </div>
+
+      <h2>Кнопка — Ghost</h2>
+      <div class="row">
+        <div class="cell"><span class="cell__label">Default</span><button class="btn btn--ghost btn--sm" type="button"><svg class="icon"><use href="#i-copy"/></svg><span>Скопировать</span></button></div>
+        <div class="cell"><span class="cell__label">Hover</span><button class="btn btn--ghost btn--sm is-hover" type="button"><svg class="icon"><use href="#i-copy"/></svg><span>Скопировать</span></button></div>
+        <div class="cell"><span class="cell__label">Active</span><button class="btn btn--ghost btn--sm is-active" type="button"><svg class="icon"><use href="#i-copy"/></svg><span>Скопировать</span></button></div>
+        <div class="cell"><span class="cell__label">Disabled</span><button class="btn btn--ghost btn--sm" type="button" disabled><svg class="icon"><use href="#i-copy"/></svg><span>Скопировать</span></button></div>
+        <div class="cell"><span class="cell__label">Loading</span><button class="btn btn--ghost btn--sm is-loading" type="button" aria-busy="true"><svg class="icon"><use href="#i-copy"/></svg><span>Скопировать</span></button></div>
+      </div>
+
+      <h2>Поле ввода</h2>
+      <div class="row row--wide">
+        <div class="cell"><span class="cell__label">Default</span>
+          <div class="field"><div class="field__box"><textarea class="field__input" rows="1" placeholder="Напишите сообщение..." aria-label="Default"></textarea></div></div></div>
+        <div class="cell"><span class="cell__label">Focus</span>
+          <div class="field is-focus"><div class="field__box"><textarea class="field__input" rows="1" placeholder="Напишите сообщение..." aria-label="Focus"></textarea></div></div></div>
+        <div class="cell"><span class="cell__label">Error (с текстом)</span>
+          <div class="field is-error"><div class="field__box"><textarea class="field__input" rows="1" aria-label="Error" aria-invalid="true">Очень длинное сообщение…</textarea><div class="field__footer"><span class="field__counter">1024 / 1000</span></div></div>
+          <p class="field__msg"><svg class="icon"><use href="#i-alert"/></svg><span>Сообщение длиннее 1000 символов — сократите его</span></p></div></div>
+        <div class="cell"><span class="cell__label">Disabled</span>
+          <div class="field is-disabled"><div class="field__box"><textarea class="field__input" rows="1" placeholder="Напишите сообщение..." aria-label="Disabled" disabled></textarea></div></div></div>
+        <div class="cell"><span class="cell__label">Filled</span>
+          <div class="field is-filled"><div class="field__box"><textarea class="field__input" rows="1" aria-label="Filled">Какие есть тарифы на продукт «Профи»?</textarea></div></div></div>
+      </div>
+
+      <h2>Toggle</h2>
+      <div class="row">
+        <div class="cell"><span class="cell__label">Off</span><button class="toggle" type="button" role="switch" aria-checked="false" aria-label="Тёмная тема"><span class="toggle__track"><span class="toggle__thumb"><svg class="icon toggle__icon toggle__icon--off"><use href="#i-sun"/></svg><svg class="icon toggle__icon toggle__icon--on"><use href="#i-moon"/></svg></span></span></button></div>
+        <div class="cell"><span class="cell__label">On</span><button class="toggle" type="button" role="switch" aria-checked="true" aria-label="Тёмная тема"><span class="toggle__track"><span class="toggle__thumb"><svg class="icon toggle__icon toggle__icon--off"><use href="#i-sun"/></svg><svg class="icon toggle__icon toggle__icon--on"><use href="#i-moon"/></svg></span></span></button></div>
+        <div class="cell"><span class="cell__label">Disabled</span><button class="toggle" type="button" role="switch" aria-checked="false" aria-label="Тёмная тема" disabled><span class="toggle__track"><span class="toggle__thumb"><svg class="icon toggle__icon toggle__icon--off"><use href="#i-sun"/></svg><svg class="icon toggle__icon toggle__icon--on"><use href="#i-moon"/></svg></span></span></button></div>
+      </div>
+
+      <h2>Цвета (семантика)</h2>
+      <div class="swatches" data-swatches></div>
+    </section>
+  </template>
+
+  <script>
+    (function () {
+      var kit = document.getElementById('kit');
+      var tpl = document.getElementById('tpl-theme');
+      var tokens = ['--c-bg-page', '--c-bg-surface', '--c-bg-surface-2', '--c-text-primary', '--c-text-secondary', '--c-text-tertiary',
+        '--c-border', '--c-border-input', '--c-accent-primary', '--c-accent-primary-hover', '--c-accent-primary-active',
+        '--c-accent-brand', '--c-accent-text', '--c-accent-soft', '--c-error', '--c-disabled-bg'];
+
+      [['light', 'Светлая тема'], ['dark', 'Тёмная тема']].forEach(function (t) {
+        var node = tpl.content.firstElementChild.cloneNode(true);
+        node.dataset.theme = t[0];
+        node.querySelector('h1').textContent = t[1];
+        kit.appendChild(node);
+        var cs = getComputedStyle(node);
+        node.querySelector('[data-swatches]').innerHTML = tokens.map(function (k) {
+          var v = cs.getPropertyValue(k).trim();
+          return '<div class="sw"><i style="background:var(' + k + ')"></i><span>' + k.replace('--c-', '') + '</span><code>' + v + '</code></div>';
+        }).join('');
+      });
+
+      kit.querySelectorAll('.field__input').forEach(function (ta) {
+        ta.style.height = 'auto';
+        ta.style.height = ta.scrollHeight + 'px';
+      });
+
+      kit.addEventListener('click', function (e) {
+        var sw = e.target.closest('.toggle:not(:disabled)');
+        if (sw) sw.setAttribute('aria-checked', String(sw.getAttribute('aria-checked') !== 'true'));
+      });
+    })();
+  </script>
+</body>
+</html>
